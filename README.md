@@ -2,6 +2,7 @@
 XIU rtmp-cluster https://github.com/harlanc/xiu.git
 
 Requrements: 
+- Install kubectl, awscli and eksctl tools
 For Windows:
 - Install Chocolatey (in pwrsh elevated mode):
 https://www.studytonight.com/post/install-chocolatey-package-manager-for-windows
