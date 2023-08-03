@@ -1,4 +1,4 @@
-# Deploy XIU on AWS EKS (Kubernetes) with AWS Load Balancer Controller 
+# Deploy XIU on AWS EKS (Kubernetes) with AWS Load Balancer Controller  
 XIU rtmp-cluster https://github.com/harlanc/xiu.git
 
 Requrements: 
