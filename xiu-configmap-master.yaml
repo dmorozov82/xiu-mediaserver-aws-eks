@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: xiu-node-config
+  namespace: xiu-prod-ns
+  labels:
+    app: xiu
+    environment: prod
+data:
+  config_rtmp_httpflv_hls.toml: |
+    [rtmp]
+    enabled = true
+    port = 1935
+    [hls]
+    enabled = true
+    port = 8080
+    [httpflv]
+    enabled = true
+    port = 8081
+    [log]
+    level = "info"
+    

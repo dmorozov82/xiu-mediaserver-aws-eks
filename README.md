@@ -1,9 +1,10 @@
-# Deploy XIU on AWS EKS (Kubernetes) with AWS Load Balancer Controller  
+# Running XIU on AWS EKS (Kubernetes) with AWS Load Balancer Controller
 XIU rtmp-cluster https://github.com/harlanc/xiu.git
 
-Requrements: 
-- Install kubectl, awscli and eksctl tools
-For Windows:
+## Requrements: 
+- Install **kubectl**, **awscli**, **eksctl**, **helm** (out of scope of this readme).
+
+### Notes for Windows:
 - Install Chocolatey (in pwrsh elevated mode):
 https://www.studytonight.com/post/install-chocolatey-package-manager-for-windows
 ```
@@ -11,8 +12,12 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 ```
 - Install Helm:
 https://www.studytonight.com/post/installing-kubernetes-helm-on-windows
-``` choco install kubernetes-helm ```
-- In Linux replace "`" with backslash "\\" in multiline code.
+``` 
+choco install kubernetes-helm 
+```
+
+### Notes for Linux
+- In Linux replace **`** with backslash **\\** in multiline code.
 
 # Deployment to EKS
 1. Deploy k8s cluster using eksctl tool:
@@ -35,7 +40,7 @@ aws iam create-policy `
     --policy-name AWSLoadBalancerControllerIAMPolicy `
     --policy-document file://iam_policy.json
 ```
-4. Create an IAM role. Create a Kubernetes service account named aws-load-balancer-controller in the kube-system namespace for the AWS Load Balancer Controller and annotate the Kubernetes service account with the name of the IAM role (851737112717 - Account ID):
+4. Create an IAM role. Create a Kubernetes service account named **aws-load-balancer-controller** in the **kube-system** namespace for the AWS Load Balancer Controller and annotate the Kubernetes service account with the name of the IAM role (*851737112717* - Account ID, replace with our own):
 ```
 aws configure set region us-west-1 
 

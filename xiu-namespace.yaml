@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: xiu-prod-ns
+  labels:
+    app: xiu
+    environment: prod

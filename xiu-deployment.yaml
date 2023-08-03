@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: xiu-prod-deployment
+  namespace: xiu-prod-ns
+  labels:
+    app: xiu
+    environment: prod
+spec:
+  selector:
+    matchLabels:
+      app: xiu
+      environment: prod
+  replicas: 2
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: xiu
+        environment: prod
+    spec:
+      containers:
+      - name: xiu-prod-pod
+        image: dmorozov82/1690651800-bf8e4c4328664a8ac5a997b0e34b4c1c:1.0.0
+        imagePullPolicy: Always
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+          requests:
+            memory: "128Mi"
+            cpu: "200m"
+        ports:
+        - containerPort: 1935
+        - containerPort: 8080
+        - containerPort: 8081
+        readinessProbe:
+          tcpSocket:
+            port: 8080
+          initialDelaySeconds: 10
+        livenessProbe:
+          tcpSocket:
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 30
+        volumeMounts:
+        - name: config
+          mountPath: "/etc/xiu"
+          readOnly: true
+      volumes:
+        - name: config
+          configMap:
+            name: xiu-node-config
+            items:
+            - key: "config_rtmp_httpflv_hls.toml"
+              path: "config_rtmp_httpflv_hls.toml"
